@@ -1,6 +1,31 @@
 "use client";
+import { useState } from "react";
+import { Comment } from "@/components/Comment";
+import { PostOwner } from "@/components/PostOwner";
+import { Reply } from "@/components/Reply";
+import { nanoid } from "nanoid";
+import { comments } from "@/libs/comments";
 
 export default function HomePage() {
+  const [Comment, setComment] = useState([]);
+  const [] = useState();
+  const [] = useState();
+
+  const addTask = (newTaskTitle) => {
+    const newTask = {
+      id: nanoid(),
+      userImagePath: newTaskTitle,
+      username: newTaskTitle,
+      commentText: newTaskTitle,
+      likeNum: newTaskTitle,
+      replies: newTaskTitle,
+    };
+    const newTasks = [...task, newTask];
+    setTask(newTask);
+  };
+  const addTaskBtn = () => {
+    addTask(task);
+  };
   return (
     <div
       style={{ minHeight: "100vh", backgroundColor: "ghostwhite" }}
@@ -13,17 +38,11 @@ export default function HomePage() {
       >
         {/* Post Owner Example*/}
         <div className="vstack gap-3">
-          <div className="d-flex align-items-center gap-3">
-            <img
-              src="/profileImages/handsome.jpg"
-              width="48"
-              height="48"
-              className="rounded-circle"
-              style={{ objectFit: "cover" }}
-            />
-            <span className="fw-semibold fs-5">Chayanin Suatap 650610560</span>
-          </div>
-
+          <PostOwner
+            fullname="Werasak"
+            lastname="Mayer"
+            student_id="650610808"
+          />
           <span>Quiz ง่ายจังเลยครับ ขอยาก ๆ กว่านี้ได้ไหม #261207</span>
 
           <div className="d-flex align-items-center gap-1">
@@ -54,6 +73,16 @@ export default function HomePage() {
               <span className="text-muted">999 คน</span>
             </div>
           </div>
+          {comments.map((comment, i) => (
+            <Comment
+              key={i}
+              userImagePath={comment.userImagePath}
+              username={comment.username}
+              commentText={comment.commentText}
+              likeNum={comment.likeNum}
+              replies={comment.replies}
+            />
+          ))}
         </div>
 
         {/* Reply Example */}
@@ -78,7 +107,6 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-
         {/* map-loop render Comment component here */}
       </div>
     </div>
